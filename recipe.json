@@ -1,0 +1,53 @@
+{
+ "name": "ego-repton-4",
+ "title": "Ego: Repton 4 (Superior Software, 1992)",
+ "platform": "acorn-archimedes",
+ "doc": "A recipe: how to turn a user's own copy of the game into a native executable. It holds no game data: the inputs are recognised by content (see $SS/tools/weave.py).",
+ "inputs": {
+  "containers": {},
+  "formats": [
+   "adf",
+   "zip"
+  ]
+ },
+ "discs": [
+  {
+   "name": "disc1",
+   "title": "Ego: Repton 4 (the protection is the last track, unformatted: the image is kept, a dump that stops before it as it is)",
+   "known_images": [
+    "de288dc02c1ed102adcee2b10af998faabf5b570fdde75e59bed75a1d9b3e998"
+   ],
+   "key_files": {
+    "!Repton4/!Run": "0a376f8c663681f7e9197c909836cc2616e322c977561ee2ac73b7369697584b",
+    "!Repton4/!RunImage": "a3260ee3addad48bcdc43b31d9fed14696ed766f3412c3fd59c731262313de1b",
+    "!Repton4/ObjCode": "6bc5e6af5a744e05fc0dd8310b12da84417ccf8d0010363058f542b8f3eb0a4c",
+    "!Repton4/LoadScreen": "158530f4f508e82fca1e7ef96254dfe47ce4bcba5e0f2ac07c2c24b1d200cd2e",
+    "!Repton4/Resources/Panel": "6e0b6cab384e807477c1e57b8f9534890af92e019193a5d56ad653c3fb903236",
+    "!Repton4/Resources/Allmaps": "c102a4fbe3c0d49f2f9eb4cce1843d4808d6b879d74c9c30b1da86386e76405e",
+    "!Repton4/Resources/Sprites": "cab4ccde9c5782abadd615b5d54a13c110c5ff98c0817c97d011f9e1603adcd3",
+    "!Repton4/Resources/Faces": "07541bee3cd4f71b97ed6a43682add3ea1255f20a5ff12714e798691abcace95"
+   },
+   "raw": true,
+   "game_dirs": [
+    "!Repton4"
+   ]
+  }
+ ],
+ "build": [
+  "python3 -I \"$WEAVE\" extract . INPUTS",
+  "make -C recomp regen",
+  "make -C recomp"
+ ],
+ "output": "recomp/repton4",
+ "requires": {
+  "superspider": "~/stuff/superspider, or $SUPERSPIDER (dune build): analyse, gen, tools/weave.py",
+  "libroger": "~/stuff/libroger, or make ROGER=...",
+  "host": [
+   "python3",
+   "ocaml + dune",
+   "gcc",
+   "SDL3 (pkg-config sdl3)"
+  ]
+ },
+ "run": "cd recomp && ./repton4"
+}

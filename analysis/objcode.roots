@@ -1,0 +1,8 @@
+# The table of routines at &1E14C (called from &9FB8: ldr r11,[table,r0];
+# mov lr,pc; mov pc,r11) has three null entries at &1E17C-&1E184; its five
+# entries after them, which the analysis's scan stops short of:
+&c044
+&c048
+&c054	# gap entry, from pc=&9fb8 LR=&9fbc
+&c058
+&c064
