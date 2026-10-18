@@ -68,7 +68,11 @@ losing every life, Ctrl-Q - there are no other gaps.
 
 The game is paced by the vsync (it waits on a counter its event handler
 counts), so it runs at the original's speed at any CPU speed. Its menus'
-wipes run as fast as the host does.
+wipes run as fast as the host does. Some of them spiral in to the middle
+of the screen, or open out from it, so a screenshot in the middle of one
+shows a fragment of one page inside the other (a few letters of
+"DEMONSTRATION!" in the middle of the high score table, a black square in
+the Utopia logo): only the wipe routines (&10000-&10A50) write there.
 
 Controls
 --------
@@ -99,11 +103,6 @@ Not done
 
 - Levels 13-30 have only been seen in the demo: the disc gives no
   passwords for them.
-- After a game or the demo ends, the high score table sometimes shows a
-  few stray pixels in the middle of the screen, the colours of Ego's
-  sprite where Ego stands in play: probably the game's own sprite drawing
-  racing the screen being cleared (in headless runs' timing at least). Not
-  looked into further.
 - The program calls an unknown SWI (&280, X form) at start and passes its
   result back at quit; libroger returns an error for it, as RISC OS 3.1
   would, and the game ignores it.
