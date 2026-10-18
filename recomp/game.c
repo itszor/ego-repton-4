@@ -50,6 +50,14 @@ static const struct roger_config config = {
     .variables = variables,
     .initial_mode = 13,
     .wimpslot = 640 * 1024,                      /* !Run */
+    /* An 8MHz ARM2's speed. The game turns an ARM3's cache off while it
+     * runs (Cache_Control, SWI &280: the ARM3 module's, which an ARM2
+     * hasn't, so the call fails there and the game carries on), so it
+     * runs at an ARM2's speed on either. Play waits for the vsync (a
+     * tick is 15-30K instructions, 90K a frame here), but the menus'
+     * wipes run flat out: at the host's speed they would be instant.
+     * --mips=N to change it, 0 for flat out. */
+    .mips = 4.5,
     /* the keys (key transition events): Z left, X right, ' up, / down,
      * Return drop (as Define Keys shows them; it can change them). A
      * controller holds those. The game reads Acorn's joystick too

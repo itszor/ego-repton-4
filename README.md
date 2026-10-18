@@ -67,8 +67,16 @@ statistics, a password, levels 1-12 (the eleven passwords on the disc),
 losing every life, Ctrl-Q - there are no other gaps.
 
 The game is paced by the vsync (it waits on a counter its event handler
-counts), so it runs at the original's speed at any CPU speed. Its menus'
-wipes run as fast as the host does. Some of them spiral in to the middle
+counts), and each tick is one vsync (50 a second). The menus' wipes run
+flat out, though, and the game means them to run at an ARM2's speed: at
+start it turns an ARM3's cache off (Cache_Control, SWI &280, the ARM3
+module's: R0=0, R1=0, keeping the old state, which it restores at quit),
+making an ARM3 run as an ARM2 does. On an ARM2 there is no ARM3 module,
+the call fails and the game ignores it; libroger is an ARM2, so it does
+the same. game.c sets libroger's CPU speed to an 8MHz ARM2's, 4.5 MIPS:
+a tick of play takes 15-30K instructions (90K a frame at that speed), and
+the wipes take a second or two, not no time at all (--mips=N to change
+it, --mips=0 for flat out). Some of them spiral in to the middle
 of the screen, or open out from it, so a screenshot in the middle of one
 shows a fragment of one page inside the other (a few letters of
 "DEMONSTRATION!" in the middle of the high score table, a black square in
@@ -103,6 +111,3 @@ Not done
 
 - Levels 13-30 have only been seen in the demo: the disc gives no
   passwords for them.
-- The program calls an unknown SWI (&280, X form) at start and passes its
-  result back at quit; libroger returns an error for it, as RISC OS 3.1
-  would, and the game ignores it.
