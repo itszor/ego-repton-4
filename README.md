@@ -33,7 +33,7 @@ What it makes:
     recomp/repton4           the game
 
 Committed: recipe.json, build.sh, analysis/objcode.roots, recomp/
-(Makefile, game.c), this file.
+(Makefile, game.c, repton4.ini), this file.
 
 How the disc starts the game
 ----------------------------
